@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROXIMITER DRIFT TRAINING SYSTEM – Access Verification</title>
+
+<style>
+    body {
+        background-color: #0f0f0f;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 12px;
+        width: 400px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 13px;
+        color: #aaa;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-size: 13px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: none;
+        background: #2a2a2a;
+        color: white;
+    }
+
+    input[type="checkbox"] {
+        margin-top: 15px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        background: #ff2e2e;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ff4d4d;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>PROXIMITER DRIFT TRAINING SYSTEM</h1>
+    <p>Complete this form to receive access to the car pack.  
+    Access is granted manually after verification.</p>
+
+    <form action="https://formspree.io/f/YOUR_ID" method="POST">
+
+        <label>Email Address</label>
+        <input type="email" name="email" required>
+
+        <label>SteamID (64-bit)</label>
+        <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
+
+        <label>Patreon Username</label>
+        <input type="text" name="patreon" required>
+
+        <label>Discord Username</label>
+        <input type="text" name="discord" required>
+
+        <label>
+            <input type="checkbox" required>
+            I confirm that the information provided is correct.
+        </label>
+
+        <button type="submit">Submit Verification</button>
+
+    </form>
+</div>
+
+</body>
+</html>
