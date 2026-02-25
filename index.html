@@ -1,3 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Proximiter Drift Training System</title>
+<style>
+body { background-color:#0f0f0f; font-family:Arial,sans-serif; color:white; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
+.container { background:#1a1a1a; padding:30px; border-radius:12px; width:420px; box-shadow:0 0 20px rgba(0,0,0,0.5);}
+h1{font-size:20px;margin-bottom:10px;text-align:center;}
+p{font-size:13px;color:#aaa;margin-bottom:20px;text-align:center;}
+.field-group{margin-bottom:18px;}
+label{display:block;margin-bottom:6px;font-size:14px;}
+input[type="text"],input[type="email"]{width:100%;padding:10px;border-radius:6px;border:none;background:#2a2a2a;color:white;font-size:14px;}
+.checkbox-label{display:flex;align-items:center;font-size:13px;margin-top:12px;}
+input[type="checkbox"]{margin-right:8px;}
+button{width:100%;margin-top:20px;padding:12px;border:none;border-radius:6px;background:#ff2e2e;color:white;font-weight:bold;cursor:pointer;font-size:14px;transition:0.2s;}
+button:hover{background:#ff4d4d;}
+.hint{margin-top:5px;font-size:12px;color:#bbb;background:#222;padding:6px 10px;border-radius:6px;}
+.hint a{color:#ff2e2e;text-decoration:underline;}
+#formMessage{margin-top:12px;font-size:13px;text-align:center;}
+pre { color: #4fff4f; background:#111; padding:10px; border-radius:6px; margin-top:10px; font-size:13px; overflow-x:auto;}
+</style>
+</head>
+<body>
+
 <div class="container">
   <h1>PROXIMITER DRIFT TRAINING SYSTEM</h1>
   <p>Complete this form to receive access to the car pack. Access is granted manually after verification.</p>
@@ -12,25 +37,19 @@
     <div class="field-group">
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
-      <div class="hint">
-        Find your SteamID here: <a href="https://steamid.io/" target="_blank" style="color:#ff2e2e;text-decoration:underline;">steamid.io</a>
-      </div>
+      <div class="hint">Find your SteamID here: <a href="https://steamid.io/" target="_blank">steamid.io</a></div>
     </div>
 
     <div class="field-group">
       <label>Patreon Username</label>
       <input type="text" name="patreon" required>
-      <div class="hint">
-        Your Patreon username (or enter anything if you don't have an account).
-      </div>
+      <div class="hint">Your Patreon username (or enter anything if you don't have an account).</div>
     </div>
 
     <div class="field-group">
       <label>Discord Username</label>
       <input type="text" name="discord" required>
-      <div class="hint">
-        Your Discord name with tag, e.g., UserName#1234.
-      </div>
+      <div class="hint">Your Discord name with tag, e.g., UserName#1234.</div>
     </div>
 
     <label class="checkbox-label">
@@ -41,30 +60,16 @@
     <button type="submit">Submit Verification</button>
     <p id="formMessage"></p>
   </form>
-</div>
 
-<style>
-body { background-color:#0f0f0f; font-family:Arial; color:white; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
-.container { background:#1a1a1a; padding:30px; border-radius:12px; width:420px; box-shadow:0 0 20px rgba(0,0,0,0.5);}
-h1{font-size:20px;margin-bottom:10px;text-align:center;}
-p{font-size:13px;color:#aaa;margin-bottom:20px;text-align:center;}
-.field-group{margin-bottom:18px;}
-label{display:block;margin-bottom:6px;font-size:14px;}
-input[type="text"],input[type="email"]{width:100%;padding:10px;border-radius:6px;border:none;background:#2a2a2a;color:white;font-size:14px;}
-.checkbox-label{display:flex;align-items:center;font-size:13px;margin-top:12px;}
-input[type="checkbox"]{margin-right:8px;}
-button{width:100%;margin-top:20px;padding:12px;border:none;border-radius:6px;background:#ff2e2e;color:white;font-weight:bold;cursor:pointer;font-size:14px;transition:0.2s;}
-button:hover{background:#ff4d4d;}
-.hint{margin-top:5px;font-size:12px;color:#bbb;background:#222;padding:6px 10px;border-radius:6px;}
-.hint a{color:#ff2e2e;text-decoration:underline;}
-#formMessage{margin-top:12px;font-size:13px;text-align:center;}
-</style>
+  <pre id="debugOutput"></pre> <!-- Tu pokaże odpowiedź Workera -->
+</div>
 
 <script>
 const form = document.getElementById('verificationForm');
 const message = document.getElementById('formMessage');
+const debug = document.getElementById('debugOutput');
 
-// Wstaw dokładny URL Twojego Workera
+// Wstaw swój Worker URL
 const WORKER_URL = 'https://hidden-moon-7f9f.peter.proximiter.workers.dev';
 
 form.addEventListener('submit', async (e) => {
@@ -73,19 +78,27 @@ form.addEventListener('submit', async (e) => {
 
   try {
     const response = await fetch(WORKER_URL, { method:'POST', body:formData });
-    if (response.ok){
+    const data = await response.json();
+
+    if (response.ok && data.success) {
       message.style.color = '#4fff4f';
       message.textContent = 'Form submitted successfully!';
       form.reset();
     } else {
-      const data = await response.json();
       message.style.color = '#ff4d4d';
       message.textContent = data.error || 'Error submitting the form.';
     }
-  } catch(err){
+
+    debug.textContent = JSON.stringify(data, null, 2); // pokaż odpowiedź JSON dla debugu
+
+  } catch (err) {
     message.style.color = '#ff4d4d';
     message.textContent = 'Failed to submit the form.';
+    debug.textContent = err.message;
     console.error(err);
   }
 });
 </script>
+
+</body>
+</html>
