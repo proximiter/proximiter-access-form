@@ -44,62 +44,27 @@
 </div>
 
 <style>
-body {
-  background-color: #0f0f0f;
-  font-family: Arial, sans-serif;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-.container {
-  background: #1a1a1a;
-  padding: 30px;
-  border-radius: 12px;
-  width: 420px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-h1 { font-size: 20px; margin-bottom: 10px; text-align: center; }
-p { font-size: 13px; color: #aaa; margin-bottom: 20px; text-align: center; }
-.field-group { margin-bottom: 18px; }
-label { display: block; margin-bottom: 6px; font-size: 14px; }
-input[type="text"], input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  background: #2a2a2a;
-  color: white;
-  font-size: 14px;
-}
-.checkbox-label { display: flex; align-items: center; font-size: 13px; margin-top: 12px; }
-input[type="checkbox"] { margin-right: 8px; }
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #ff2e2e;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
-}
-button:hover { background: #ff4d4d; }
-.hint { margin-top: 5px; font-size: 12px; color: #bbb; background: #222; padding: 6px 10px; border-radius: 6px; }
-.hint a { color: #ff2e2e; text-decoration: underline; }
-#formMessage { margin-top: 12px; font-size: 13px; text-align: center; }
+body { background-color:#0f0f0f; font-family:Arial; color:white; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
+.container { background:#1a1a1a; padding:30px; border-radius:12px; width:420px; box-shadow:0 0 20px rgba(0,0,0,0.5);}
+h1{font-size:20px;margin-bottom:10px;text-align:center;}
+p{font-size:13px;color:#aaa;margin-bottom:20px;text-align:center;}
+.field-group{margin-bottom:18px;}
+label{display:block;margin-bottom:6px;font-size:14px;}
+input[type="text"],input[type="email"]{width:100%;padding:10px;border-radius:6px;border:none;background:#2a2a2a;color:white;font-size:14px;}
+.checkbox-label{display:flex;align-items:center;font-size:13px;margin-top:12px;}
+input[type="checkbox"]{margin-right:8px;}
+button{width:100%;margin-top:20px;padding:12px;border:none;border-radius:6px;background:#ff2e2e;color:white;font-weight:bold;cursor:pointer;font-size:14px;transition:0.2s;}
+button:hover{background:#ff4d4d;}
+.hint{margin-top:5px;font-size:12px;color:#bbb;background:#222;padding:6px 10px;border-radius:6px;}
+.hint a{color:#ff2e2e;text-decoration:underline;}
+#formMessage{margin-top:12px;font-size:13px;text-align:center;}
 </style>
 
 <script>
 const form = document.getElementById('verificationForm');
 const message = document.getElementById('formMessage');
 
-// Tutaj wstaw URL Workera dokładnie z Cloudflare:
+// Wstaw dokładny URL Twojego Workera
 const WORKER_URL = 'https://hidden-moon-7f9f.peter.proximiter.workers.dev';
 
 form.addEventListener('submit', async (e) => {
@@ -107,8 +72,8 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
 
   try {
-    const response = await fetch(WORKER_URL, { method: 'POST', body: formData });
-    if (response.ok) {
+    const response = await fetch(WORKER_URL, { method:'POST', body:formData });
+    if (response.ok){
       message.style.color = '#4fff4f';
       message.textContent = 'Form submitted successfully!';
       form.reset();
@@ -117,7 +82,7 @@ form.addEventListener('submit', async (e) => {
       message.style.color = '#ff4d4d';
       message.textContent = data.error || 'Error submitting the form.';
     }
-  } catch (err) {
+  } catch(err){
     message.style.color = '#ff4d4d';
     message.textContent = 'Failed to submit the form.';
     console.error(err);
