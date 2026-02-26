@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Proximiter – Limited Access</title>
+<title>Proximiter Drift Training System</title>
 <style>
 body {
     background:#0f0f0f;
@@ -124,13 +124,13 @@ button:hover { background:#ff4d4d; }
 <div class="container">
   <img class="logo" src="logo.png" alt="Proximiter Logo">
 
-  <h1>Proximiter — Limited Access</h1>
+  <h1>Proximiter Drift Training System</h1>
 
   <p>
-    Request access to the Proximiter system.<br><br>
-    Entry is <strong>limited and manually approved</strong>.<br>
-    Access fee: <span class="price">250 PLN / 75 USD</span>.<br><br>
-    Approved applicants will receive email instructions for payment and activation.
+    Access request form for the Proximiter Drift Training System.<br><br>
+    Access is limited and subject to manual review.<br>
+    Fee: <span class="price">250 PLN / 75 USD</span>.<br><br>
+    Further instructions will be provided by email after review.
   </p>
 
   <form id="verificationForm">
@@ -161,7 +161,7 @@ button:hover { background:#ff4d4d; }
       I confirm that the information provided is correct.
     </label>
 
-    <button type="submit">Submit Application</button>
+    <button type="submit">Submit Request</button>
     <p id="formMessage"></p>
   </form>
 </div>
@@ -181,15 +181,15 @@ form.addEventListener('submit', async (e) => {
 
     if (json.success) {
       message.style.color = '#4fff4f';
-      message.textContent = 'Application submitted. Check your email.';
+      message.textContent = 'Request submitted. Please wait for email confirmation.';
       form.reset();
     } else {
       message.style.color = '#ff4d4d';
-      message.textContent = json.error || 'Error submitting the form.';
+      message.textContent = json.error || 'Submission error.';
     }
   } catch {
     message.style.color = '#ff4d4d';
-    message.textContent = 'Failed to submit the form.';
+    message.textContent = 'Submission failed.';
   }
 });
 </script>
