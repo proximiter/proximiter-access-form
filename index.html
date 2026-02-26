@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Proximiter Drift Training System</title>
+<title>Proximiter Drift Training Form</title>
 <style>
 body {
     background:#0f0f0f;
@@ -115,7 +115,7 @@ button:hover { background:#ff4d4d; }
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
       <div class="hint">
-        Your SteamID can be found in the Content Manager as shown in the image below,  
+        Your SteamID can be found in Content Manager as shown in the image below,  
         or on the page: <a href="https://steamid.io" target="_blank" style="color:#ff2e2e;text-decoration:underline;">steamid.io</a>
         <img class="steam-img" src="steamidsmall.jpg" alt="SteamID example">
       </div>
@@ -133,7 +133,7 @@ button:hover { background:#ff4d4d; }
 </div>
 
 <script>
-// Wklej tutaj swój URL Google Apps Script (Web App)
+// Wklej tutaj URL Twojego Web App Google Sheets
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1MpZ29ja-bnnqz6taceLwKm9-55YUEQ1AN3uSHoCVCa4/edit?gid=0#gid=0';
 
 const form = document.getElementById('verificationForm');
@@ -141,18 +141,20 @@ const message = document.getElementById('formMessage');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
+
+  // Pobieramy tylko potrzebne pola (bez Confirm)
+  const formData = Object.fromEntries(new FormData(form).entries());
 
   try {
     const res = await fetch(SHEET_URL, {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+      body: JSON.stringify(formData),
+      headers: {'Content-Type':'application/json'}
     });
+
     const json = await res.json();
 
-    if (json.success) {
+    if(json.success){
       message.style.color = '#4fff4f';
       message.textContent = 'Form submitted successfully!';
       form.reset();
@@ -160,7 +162,7 @@ form.addEventListener('submit', async (e) => {
       message.style.color = '#ff4d4d';
       message.textContent = json.error || 'Error submitting the form.';
     }
-  } catch(err) {
+  } catch(err){
     message.style.color = '#ff4d4d';
     message.textContent = 'Failed to submit the form.';
     console.error(err);
