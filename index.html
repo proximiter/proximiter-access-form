@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Proximiter Drift Training System</title>
+<title>Proximiter – Limited Access</title>
 <style>
 body {
     background:#0f0f0f;
@@ -30,13 +30,23 @@ body {
     width:100%;
     height:auto;
     margin-bottom:20px;
-    border-radius:12px; /* <-- zaokrąglone rogi */
+    border-radius:12px;
+}
+
+h1 {
+    font-size:20px;
+    margin-bottom:15px;
 }
 
 p {
-    font-size:13px;
-    color:#aaa;
-    margin-bottom:20px;
+    font-size:14px;
+    color:#ffffff;
+    margin-bottom:25px;
+}
+
+.price {
+    color:#ff2e2e;
+    font-weight:bold;
 }
 
 .field-group {
@@ -101,7 +111,7 @@ button:hover { background:#ff4d4d; }
     max-width:100%;
     max-height:150px;
     margin-top:10px;
-    border-radius:12px; /* <-- zaokrąglone rogi */
+    border-radius:12px;
     object-fit:contain;
 }
 </style>
@@ -109,23 +119,31 @@ button:hover { background:#ff4d4d; }
 <body>
 
 <div class="container">
-  <img class="logo" src="logo.png" alt="Proximiter Drift Training Logo">
+  <img class="logo" src="logo.png" alt="Proximiter Logo">
 
-  <p>Complete this form to receive access to the car pack. Access is granted manually after verification.</p>
+  <h1>Proximiter – Limited Access</h1>
+
+  <p>
+    Request access to the Proximiter system.<br><br>
+    Entry is <strong>limited and manually approved</strong>.<br>
+    Access fee: <span class="price">250 PLN / 75 USD</span>.<br><br>
+    Approved applicants will receive email instructions for payment and activation.
+  </p>
 
   <form id="verificationForm">
     <div class="field-group">
       <label>Email Address</label>
       <input type="email" name="email" required>
-      <div class="hint">Your email where verification will be sent.</div>
+      <div class="hint">Your email where instructions will be sent.</div>
     </div>
 
     <div class="field-group">
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
       <div class="hint">
-        Your SteamID can be found in the Content Manager as shown in the image below,  
-        or on the page: <a href="https://steamid.io" target="_blank" style="color:#ff2e2e;text-decoration:underline;">steamid.io</a>
+        Your SteamID can be found in the Content Manager as shown below,
+        or on: 
+        <a href="https://steamid.io" target="_blank" style="color:#ff2e2e;text-decoration:underline;">steamid.io</a>
         <img class="steam-img" src="steamidsmall.jpg" alt="SteamID example">
       </div>
     </div>
@@ -133,7 +151,7 @@ button:hover { background:#ff4d4d; }
     <div class="field-group">
       <label>Discord Username</label>
       <input type="text" name="discord" required>
-      <div class="hint">Your Discord name with tag, e.g., UserName#1234.</div>
+      <div class="hint">Your current Discord username.</div>
     </div>
 
     <label class="checkbox-label">
@@ -141,7 +159,7 @@ button:hover { background:#ff4d4d; }
       I confirm that the information provided is correct.
     </label>
 
-    <button type="submit">Submit Verification</button>
+    <button type="submit">Submit Application</button>
     <p id="formMessage"></p>
   </form>
 </div>
@@ -161,7 +179,7 @@ form.addEventListener('submit', async (e) => {
 
     if (json.success) {
       message.style.color = '#4fff4f';
-      message.textContent = 'Form submitted successfully!';
+      message.textContent = 'Application submitted successfully. Check your email.';
       form.reset();
     } else {
       message.style.color = '#ff4d4d';
