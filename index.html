@@ -4,113 +4,30 @@
 <meta charset="UTF-8">
 <title>Proximiter Drift Training Form</title>
 <style>
-body {
-    background:#0f0f0f;
-    font-family:Arial,sans-serif;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    margin:0;
-    padding:20px;
-}
-
-.container {
-    background:#1a1a1a;
-    padding:30px;
-    border-radius:12px;
-    width:450px;
-    max-width:95%;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
-    text-align:center;
-}
-
-.logo {
-    width:100%;
-    height:auto;
-    margin-bottom:20px;
-    border-radius:12px; /* zaokrąglone rogi */
-}
-
-p {
-    font-size:13px;
-    color:#aaa;
-    margin-bottom:20px;
-}
-
-.field-group {
-    margin-bottom:18px;
-    text-align:left;
-}
-
-label {
-    display:block;
-    margin-bottom:6px;
-    font-size:14px;
-}
-
-input[type="text"], input[type="email"] {
-    width:100%;
-    padding:10px;
-    border-radius:6px;
-    border:none;
-    background:#2a2a2a;
-    color:white;
-    font-size:14px;
-}
-
-button {
-    width:100%;
-    margin-top:20px;
-    padding:12px;
-    border:none;
-    border-radius:6px;
-    background:#ff2e2e;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:14px;
-    transition:0.2s;
-}
-
+body { background:#0f0f0f; font-family:Arial,sans-serif; color:white; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; padding:20px; }
+.container { background:#1a1a1a; padding:30px; border-radius:12px; width:450px; max-width:95%; box-shadow:0 0 20px rgba(0,0,0,0.5); text-align:center; }
+.logo { width:100%; height:auto; margin-bottom:20px; border-radius:12px; }
+p { font-size:13px; color:#aaa; margin-bottom:20px; }
+.field-group { margin-bottom:18px; text-align:left; }
+label { display:block; margin-bottom:6px; font-size:14px; }
+input[type="text"], input[type="email"] { width:100%; padding:10px; border-radius:6px; border:none; background:#2a2a2a; color:white; font-size:14px; }
+button { width:100%; margin-top:20px; padding:12px; border:none; border-radius:6px; background:#ff2e2e; color:white; font-weight:bold; cursor:pointer; font-size:14px; transition:0.2s; }
 button:hover { background:#ff4d4d; }
-
-.hint {
-    margin-top:5px;
-    font-size:12px;
-    color:#bbb;
-    background:#222;
-    padding:6px 10px;
-    border-radius:6px;
-}
-
+.hint { margin-top:5px; font-size:12px; color:#bbb; background:#222; padding:6px 10px; border-radius:6px; }
 #formMessage { margin-top:12px; font-size:13px; text-align:center; }
-
-.steam-img {
-    display:block;
-    max-width:100%;
-    max-height:150px;
-    margin-top:10px;
-    border-radius:12px;
-    object-fit:contain;
-}
+.steam-img { display:block; max-width:100%; max-height:150px; margin-top:10px; border-radius:12px; object-fit:contain; }
 </style>
 </head>
 <body>
-
 <div class="container">
   <img class="logo" src="logo.png" alt="Proximiter Drift Training Logo">
-
   <p>Complete this form to receive access to the car pack. Access is granted manually after verification.</p>
-
   <form id="verificationForm">
     <div class="field-group">
       <label>Email Address</label>
       <input type="email" name="email" required>
       <div class="hint">Your email where verification will be sent.</div>
     </div>
-
     <div class="field-group">
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
@@ -120,29 +37,24 @@ button:hover { background:#ff4d4d; }
         <img class="steam-img" src="steamidsmall.jpg" alt="SteamID example">
       </div>
     </div>
-
     <div class="field-group">
       <label>Discord Username</label>
       <input type="text" name="discord" required>
       <div class="hint">Your Discord name with tag, e.g., UserName#1234.</div>
     </div>
-
     <button type="submit">Submit Verification</button>
     <p id="formMessage"></p>
   </form>
 </div>
 
 <script>
-// Wklej tutaj URL Twojego Web App Google Sheets
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbybPyU-lCcM-aTcV8P4RhIcpQcUhdvj2pbv3c6eKLWutUqnUZ3N1x35i2yBKmtF5YiJew/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwfjBo5sStxBl5THdLNJhlCsuaNB6gnqw1LIEKeIuzyof_SQpO02UdfngSXFvjXfiE/exec'; // Wklej tu URL Web App z Apps Script
 
 const form = document.getElementById('verificationForm');
 const message = document.getElementById('formMessage');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  // Pobieramy tylko potrzebne pola (bez Confirm)
   const formData = Object.fromEntries(new FormData(form).entries());
 
   try {
@@ -153,7 +65,6 @@ form.addEventListener('submit', async (e) => {
     });
 
     const json = await res.json();
-
     if(json.success){
       message.style.color = '#4fff4f';
       message.textContent = 'Form submitted successfully!';
@@ -169,6 +80,5 @@ form.addEventListener('submit', async (e) => {
   }
 });
 </script>
-
 </body>
 </html>
