@@ -30,7 +30,7 @@ body {
     width:100%;
     height:auto;
     margin-bottom:20px;
-    border-radius:12px; /* <-- zaokrąglone rogi */
+    border-radius:12px; /* zaokrąglone rogi */
 }
 
 p {
@@ -59,15 +59,6 @@ input[type="text"], input[type="email"] {
     color:white;
     font-size:14px;
 }
-
-.checkbox-label {
-    display:flex;
-    align-items:center;
-    font-size:13px;
-    margin-top:12px;
-}
-
-input[type="checkbox"] { margin-right:8px; }
 
 button {
     width:100%;
@@ -101,7 +92,7 @@ button:hover { background:#ff4d4d; }
     max-width:100%;
     max-height:150px;
     margin-top:10px;
-    border-radius:12px; /* <-- zaokrąglone rogi */
+    border-radius:12px;
     object-fit:contain;
 }
 </style>
@@ -136,27 +127,29 @@ button:hover { background:#ff4d4d; }
       <div class="hint">Your Discord name with tag, e.g., UserName#1234.</div>
     </div>
 
-    <label class="checkbox-label">
-      <input type="checkbox" name="confirm" required>
-      I confirm that the information provided is correct.
-    </label>
-
     <button type="submit">Submit Verification</button>
     <p id="formMessage"></p>
   </form>
 </div>
 
 <script>
+// Wklej tutaj swój URL Google Apps Script (Web App)
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1MpZ29ja-bnnqz6taceLwKm9-55YUEQ1AN3uSHoCVCa4/edit?gid=0#gid=0';
+
 const form = document.getElementById('verificationForm');
 const message = document.getElementById('formMessage');
-const WORKER_URL = 'https://hidden-moon-7f9f.peter-proximiter.workers.dev';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
 
   try {
-    const res = await fetch(WORKER_URL, { method:'POST', body:formData });
+    const res = await fetch(SHEET_URL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    });
     const json = await res.json();
 
     if (json.success) {
@@ -167,9 +160,10 @@ form.addEventListener('submit', async (e) => {
       message.style.color = '#ff4d4d';
       message.textContent = json.error || 'Error submitting the form.';
     }
-  } catch {
+  } catch(err) {
     message.style.color = '#ff4d4d';
     message.textContent = 'Failed to submit the form.';
+    console.error(err);
   }
 });
 </script>
