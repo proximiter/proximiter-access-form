@@ -29,24 +29,27 @@ body {
 .logo {
     width:100%;
     height:auto;
-    margin-bottom:20px;
+    margin-bottom:18px;
     border-radius:12px;
 }
 
 h1 {
-    font-size:20px;
-    margin-bottom:15px;
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:14px;
+    letter-spacing:0.5px;
 }
 
 p {
-    font-size:14px;
-    color:#ffffff;
-    margin-bottom:25px;
+    font-size:13px;
+    color:#cfcfcf;
+    margin-bottom:22px;
+    line-height:1.5;
 }
 
 .price {
     color:#ff2e2e;
-    font-weight:bold;
+    font-weight:600;
 }
 
 .field-group {
@@ -57,7 +60,7 @@ p {
 label {
     display:block;
     margin-bottom:6px;
-    font-size:14px;
+    font-size:13px;
 }
 
 input[type="text"], input[type="email"] {
@@ -67,13 +70,13 @@ input[type="text"], input[type="email"] {
     border:none;
     background:#2a2a2a;
     color:white;
-    font-size:14px;
+    font-size:13px;
 }
 
 .checkbox-label {
     display:flex;
     align-items:center;
-    font-size:13px;
+    font-size:12px;
     margin-top:12px;
 }
 
@@ -81,15 +84,15 @@ input[type="checkbox"] { margin-right:8px; }
 
 button {
     width:100%;
-    margin-top:20px;
-    padding:12px;
+    margin-top:18px;
+    padding:11px;
     border:none;
     border-radius:6px;
     background:#ff2e2e;
     color:white;
-    font-weight:bold;
+    font-weight:600;
     cursor:pointer;
-    font-size:14px;
+    font-size:13px;
     transition:0.2s;
 }
 
@@ -97,14 +100,14 @@ button:hover { background:#ff4d4d; }
 
 .hint {
     margin-top:5px;
-    font-size:12px;
-    color:#bbb;
+    font-size:11px;
+    color:#9f9f9f;
     background:#222;
     padding:6px 10px;
     border-radius:6px;
 }
 
-#formMessage { margin-top:12px; font-size:13px; text-align:center; }
+#formMessage { margin-top:12px; font-size:12px; text-align:center; }
 
 .steam-img {
     display:block;
@@ -121,7 +124,7 @@ button:hover { background:#ff4d4d; }
 <div class="container">
   <img class="logo" src="logo.png" alt="Proximiter Logo">
 
-  <h1>Proximiter – Limited Access</h1>
+  <h1>Proximiter — Limited Access</h1>
 
   <p>
     Request access to the Proximiter system.<br><br>
@@ -134,15 +137,14 @@ button:hover { background:#ff4d4d; }
     <div class="field-group">
       <label>Email Address</label>
       <input type="email" name="email" required>
-      <div class="hint">Your email where instructions will be sent.</div>
+      <div class="hint">Instructions will be sent to this email.</div>
     </div>
 
     <div class="field-group">
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
       <div class="hint">
-        Your SteamID can be found in the Content Manager as shown below,
-        or on: 
+        Find your SteamID in Content Manager or on 
         <a href="https://steamid.io" target="_blank" style="color:#ff2e2e;text-decoration:underline;">steamid.io</a>
         <img class="steam-img" src="steamidsmall.jpg" alt="SteamID example">
       </div>
@@ -179,7 +181,7 @@ form.addEventListener('submit', async (e) => {
 
     if (json.success) {
       message.style.color = '#4fff4f';
-      message.textContent = 'Application submitted successfully. Check your email.';
+      message.textContent = 'Application submitted. Check your email.';
       form.reset();
     } else {
       message.style.color = '#ff4d4d';
