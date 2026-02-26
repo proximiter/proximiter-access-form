@@ -18,7 +18,7 @@ button:hover { background:#ff4d4d; }
 .hint { margin-top:5px; font-size:12px; color:#bbb; background:#222; padding:6px 10px; border-radius:6px; }
 .hint a { color:#ff2e2e; text-decoration:underline; }
 #formMessage { margin-top:12px; font-size:13px; text-align:center; }
-pre { color:#4fff4f; background:#111; padding:10px; border-radius:6px; margin-top:10px; font-size:13px; overflow-x:auto; }
+.steam-img { display:block; max-width:100%; margin-top:10px; border-radius:6px; }
 </style>
 </head>
 <body>
@@ -37,7 +37,10 @@ pre { color:#4fff4f; background:#111; padding:10px; border-radius:6px; margin-to
     <div class="field-group">
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
-      <div class="hint">Find your SteamID here: <a href="https://steamid.io/" target="_blank">steamid.io</a></div>
+      <div class="hint">
+        Find your SteamID here: <a href="https://steamid.io/" target="_blank">steamid.io</a>
+        <img class="steam-img" src="https://i.imgur.com/8XQq4yK.png" alt="SteamID example">
+      </div>
     </div>
 
     <div class="field-group">
@@ -60,14 +63,11 @@ pre { color:#4fff4f; background:#111; padding:10px; border-radius:6px; margin-to
     <button type="submit">Submit Verification</button>
     <p id="formMessage"></p>
   </form>
-
-  <pre id="debugOutput"></pre>
 </div>
 
 <script>
 const form = document.getElementById('verificationForm');
 const message = document.getElementById('formMessage');
-const debug = document.getElementById('debugOutput');
 
 // Podmień na swój Worker URL
 const WORKER_URL = 'https://hidden-moon-7f9f.peter-proximiter.workers.dev';
@@ -91,12 +91,9 @@ form.addEventListener('submit', async (e) => {
       message.style.color = '#ff4d4d';
       message.textContent = json.error || 'Error submitting the form.';
     }
-
-    debug.textContent = JSON.stringify(json, null, 2);
   } catch (err) {
     message.style.color = '#ff4d4d';
     message.textContent = 'Failed to submit the form.';
-    debug.textContent = err.message;
   }
 });
 </script>
