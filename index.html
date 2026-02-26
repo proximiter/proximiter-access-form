@@ -10,7 +10,7 @@ body {
     color:white;
     display:flex;
     justify-content:center;
-    flex-direction: column;
+    align-items:center;
     min-height:100vh;
     margin:0;
     padding:20px;
@@ -20,15 +20,14 @@ body {
     background:#1a1a1a;
     padding:30px;
     border-radius:12px;
-    width:420px;
-    max-width:90%;
+    width:450px;
+    max-width:95%;
     box-shadow:0 0 20px rgba(0,0,0,0.5);
-    text-align:center; /* wyśrodkowanie logo i treści */
+    text-align:center;
 }
 
 .logo {
-    width:200px;        /* dopasowane do kontenera */
-    max-width:80%;
+    width:100%;
     height:auto;
     margin-bottom:20px;
 }
@@ -41,7 +40,7 @@ p {
 
 .field-group {
     margin-bottom:18px;
-    text-align:left; /* etykiety i inputy pozostają wyrównane do lewej */
+    text-align:left;
 }
 
 label {
@@ -94,8 +93,6 @@ button:hover { background:#ff4d4d; }
     border-radius:6px;
 }
 
-.hint a { color:#ff2e2e; text-decoration:underline; }
-
 #formMessage { margin-top:12px; font-size:13px; text-align:center; }
 
 .steam-img {
@@ -111,7 +108,6 @@ button:hover { background:#ff4d4d; }
 <body>
 
 <div class="container">
-  <!-- Logo wyśrodkowane -->
   <img class="logo" src="logo.png" alt="Proximiter Drift Training Logo">
 
   <p>Complete this form to receive access to the car pack. Access is granted manually after verification.</p>
@@ -127,7 +123,8 @@ button:hover { background:#ff4d4d; }
       <label>SteamID (64-bit)</label>
       <input type="text" name="steamid" placeholder="7656119XXXXXXXXXX" required>
       <div class="hint">
-        Find your SteamID here: <a href="https://steamid.io/" target="_blank">steamid.io</a>
+        Your SteamID can be found in the Content Manager as shown in the image below,  
+        or on the page: <a href="https://steamid.io" target="_blank" style="color:#ff2e2e;text-decoration:underline;">steamid.io</a>
         <img class="steam-img" src="steamidsmall.jpg" alt="SteamID example">
       </div>
     </div>
